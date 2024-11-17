@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",                      // Node.js uses CommonJS
+    "target": "ES6",                           // Target modern JavaScript
+    "strict": true,                            // Enable strict type checking
+    "esModuleInterop": true                    // Support default imports from CommonJS
+  },
+  "include": ["vite.config.ts"],               // Include Vite's config file
+  "exclude": ["node_modules", "dist"]          // Exclude dependencies and build files
+}

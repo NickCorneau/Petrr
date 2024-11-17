@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.app.json",            // Extend the app-specific config
+  "compilerOptions": {
+    "baseUrl": "./",                           // Base URL for resolving paths
+    "paths": {
+      "@/*": ["src/*"]                         // Map imports like "@/components" to "src/components"
+    }
+  },
+  "include": ["src"],                          // Include frontend source code
+  "exclude": ["node_modules", "dist"]          // Exclude dependencies and build files
+}
