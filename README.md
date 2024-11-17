@@ -1,0 +1,1 @@
+TL;DR: Assisting personal trainers (PTs) in efficiently managing client programming, integrating client feedback seamlessly, and staying updated with the latest, relevant health & fitness research, through an AI-driven platform offering personalized, evidence-based support.
