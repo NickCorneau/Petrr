@@ -1,11 +1,12 @@
+// frontend/src/App.tsx
 import React from 'react';
-import ProgramGenerator from './program_generation/ProgramGenerator';
+import ProgramGenerator from './containers/ProgramGenerator';
 import './App.css';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div id="root">
+      <header>
         <ProgramGenerator />
       </header>
     </div>

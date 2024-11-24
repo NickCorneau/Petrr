@@ -1,13 +1,13 @@
+// backend/src/app.ts
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 import { ChatOpenAI } from '@langchain/openai';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { StringOutputParser } from '@langchain/core/output_parsers';
-import { SystemMessage, HumanMessage } from '@langchain/core/messages';
-import mongoose from 'mongoose';
-import Program, { IClientData } from './models/Program';
-
+import Program from './models/Program';
+import { IClientData } from './models/ClientData';
 
 dotenv.config();
 
@@ -21,9 +21,9 @@ app.use(express.json());
 // Connect to MongoDB
 mongoose
   .connect(process.env.MONGODB_URI!, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    } as mongoose.ConnectOptions)
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  } as mongoose.ConnectOptions)
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
@@ -63,22 +63,16 @@ const parser = new StringOutputParser();
 // Combine the prompt template, model, and parser into a chain
 const llmChain = promptTemplate.pipe(model).pipe(parser);
 
-// API Endpoint
+// API Endpoints
 app.post('/generate-program', async (req: Request, res: Response) => {
   const clientData: IClientData = req.body;
   try {
-    
-    // invoke call to OpenAI
     const response = await llmChain.invoke(clientData);
-    
-    // save new program and client data to MongoDB
     const newProgram = new Program({
       clientData,
       programText: response,
     });
     await newProgram.save();
-
-    // return JSON response to the requestee
     res.json({ program: response });
   } catch (error) {
     console.error('Error generating program:', error);

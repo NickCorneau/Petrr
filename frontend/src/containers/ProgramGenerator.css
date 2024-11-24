@@ -1,0 +1,31 @@
+.program-generator-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Inter', sans-serif;
+}
+
+.title {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 25px;
+  color: #849aaf;
+  font-weight: 600;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 1em;
+  margin-bottom: 25px;
+  color: #849aaf;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.error-message {
+  color: #e74c3c;
+  text-align: center;
+  margin-top: 10px;
+}

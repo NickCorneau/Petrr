@@ -1,15 +1,5 @@
 import mongoose, { Document, Schema } from 'mongoose';
-
-export interface IClientData {
-  age: number;
-  gender: string;
-  fitnessLevel: string;
-  goals: string;
-  preferences: string;
-  limitations: string;
-  equipment: string;
-  availability: string;
-}
+import { ClientDataSchema, IClientData } from './ClientData';
 
 export interface IProgram extends Document {
   clientData: IClientData;
@@ -17,19 +7,8 @@ export interface IProgram extends Document {
   createdAt: Date;
 }
 
-const ClientDataSchema: Schema = new Schema({
-  age: { type: Number, required: true },
-  gender: { type: String, required: true },
-  fitnessLevel: { type: String, required: true },
-  goals: { type: String, required: true },
-  preferences: { type: String, required: true },
-  limitations: { type: String, required: true },
-  equipment: { type: String, required: true },
-  availability: { type: String, required: true },
-});
-
 const ProgramSchema: Schema = new Schema({
-  clientData: { type: ClientDataSchema, required: true },
+  clientData: { type: ClientDataSchema, required: true, _id: false },
   programText: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
 });

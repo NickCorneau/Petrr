@@ -1,0 +1,17 @@
+.program-output {
+  margin-top: 25px;
+  padding: 20px;
+  border-radius: 8px;
+  font-size: 0.9em;
+}
+
+.output-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #849aaf;
+}
+
+.output-text {
+  white-space: pre-wrap;
+  font-family: 'Courier New', Courier, monospace;
+}
