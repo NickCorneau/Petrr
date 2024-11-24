@@ -1,7 +1,9 @@
-# user official node version
-FROM node:lts-alpine
+# frontend/Dockerfile
 
-# Set the working directory inside the container
+# Use an official Node.js image based on Debian
+FROM node:18
+
+# Set the working directory
 WORKDIR /usr/src/app
 
 # Copy package.json and package-lock.json
@@ -10,10 +12,10 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Copy the rest of your frontend code
+# Copy the rest of the frontend code
 COPY . .
 
-# Expose port 5173 for Vite dev server
+# Expose port 5173 for Vite
 EXPOSE 5173
 
 # Start the frontend development server
