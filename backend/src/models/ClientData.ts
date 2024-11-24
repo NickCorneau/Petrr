@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 export interface IClientData {
+  name: string;
   age: number;
   gender: string;
   fitnessLevel: string;
@@ -12,12 +13,13 @@ export interface IClientData {
 }
 
 export const ClientDataSchema: Schema = new Schema({
-  age: { type: Number, required: true },
-  gender: { type: String, required: true },
+  name: { type: String, required: true },
+  age: { type: Number, required: false },
+  gender: { type: String, required: false },
   fitnessLevel: { type: String, required: true },
   goals: { type: String, required: true },
-  preferences: { type: String, required: true },
-  limitations: { type: String, required: true },
-  equipment: { type: String, required: true },
-  availability: { type: String, required: true },
+  preferences: { type: String, required: false },
+  limitations: { type: String, required: false },
+  equipment: { type: String, required: false },
+  availability: { type: String, required: false },
 });

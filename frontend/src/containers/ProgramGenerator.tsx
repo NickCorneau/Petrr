@@ -1,13 +1,14 @@
-// frontend/src/program_generation/ProgramGenerator.tsx
+// frontend/src/containers/ProgramGenerator.tsx
 import React, { useState } from 'react';
-import './ProgramGenerator.css';
 import { generateProgram, ClientData } from '../api_service/ApiService';
 import ClientInputForm from '../components/ClientInputForm';
 import ProgramOutput from '../components/ProgramOutput';
+import ClientSidebar from '../components/ClientSidebar';
 
 const ProgramGenerator: React.FC = () => {
   const [clientData, setClientData] = useState<ClientData>({
-    age: 0,
+    name: '',
+    age: '',
     gender: '',
     fitnessLevel: '',
     goals: '',
@@ -38,18 +39,24 @@ const ProgramGenerator: React.FC = () => {
     }
   };
 
+  const handleSelectClient = (client: ClientData) => {
+    setClientData(client);
+  };
+
   return (
     <div className="program-generator-container">
-      <h1 className="title">Hello, I'm Petrr</h1>
-      <h2 className='subtitle'>(Pe)rsonal (Tr)aining (R)esearch Aide</h2>
-      <ClientInputForm
-        clientData={clientData}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-        loading={loading}
-      />
-      {error && <p className="error-message">{error}</p>}
-      {program && <ProgramOutput program={program} />}
+      <ClientSidebar onSelectClient={handleSelectClient} />
+
+      <div className="program-generator-content">
+        <ClientInputForm
+          clientData={clientData}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+          loading={loading}
+        />
+        {error && <p className="error-message">{error}</p>}
+        {program && <ProgramOutput program={program} />}
+      </div>
     </div>
   );
 };

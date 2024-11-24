@@ -38,3 +38,12 @@
     background-color: #aaa;
     cursor: not-allowed;
   }
+
+  /* Sidebar header */
+  .form h3 {
+    font-size: 1.5em;
+    color: #f9f7f7;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  

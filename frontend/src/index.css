@@ -1,3 +1,10 @@
+/* Scoped override for your layout */
+.program-generator-container {
+  display: grid;
+  grid-template-columns: 250px 1fr; /* Sidebar takes 250px, form takes remaining space */
+  column-gap: 20px;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -65,4 +72,21 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.title {
+  text-align: left;
+  font-size: 2em;
+  margin-bottom: 25px;
+  color: #849aaf;
+  font-weight: 600;
+}
+
+.subtitle {
+  text-align: left;
+  font-size: 1em;
+  margin-bottom: 25px;
+  color: #849aaf;
+  font-weight: 600;
+  font-style: italic;
 }

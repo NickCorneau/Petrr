@@ -1,29 +1,35 @@
+/* ProgramGenerator.css */
+
+/* Parent container */
 .program-generator-container {
-  max-width: 500px;
-  margin: 0 auto;
+  /* all: unset; Resets all inherited and default properties */
+  /* display: flex !important; Enforce flex display */
+  /* flex-direction: row; Arrange children horizontally */
+  height: 100vh; /* Full height of the viewport */
+  max-width: 100%; /* Allow the container to use full width */
+  /* margin: 0;
+  padding: 0; */
+  padding: 0 20px;
+  column-gap: 20px;
+  grid-template-columns: 250px 1fr;
+  display: grid
+;
+}
+
+/* Main content area */
+.program-generator-content {
+  flex: 1; /* Take up remaining horizontal space */
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   font-family: 'Inter', sans-serif;
+  overflow-y: auto; /* Allow scrolling if content overflows */
+  display: flex; /* Vertical stacking of content inside this area */
+  flex-direction: column;
+  justify-content: flex-start; /* Align content to the top */
 }
 
-.title {
-  text-align: center;
-  font-size: 2em;
-  margin-bottom: 25px;
-  color: #849aaf;
-  font-weight: 600;
-}
-
-.subtitle {
-  text-align: center;
-  font-size: 1em;
-  margin-bottom: 25px;
-  color: #849aaf;
-  font-weight: 600;
-  font-style: italic;
-}
-
+/* Error message */
 .error-message {
   color: #e74c3c;
   text-align: center;

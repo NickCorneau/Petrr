@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import { ChatOpenAI } from '@langchain/openai';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { StringOutputParser } from '@langchain/core/output_parsers';
-import Program from './models/Program';
+import Program, { IProgram } from './models/Program';
 import { IClientData } from './models/ClientData';
 
 dotenv.config();
@@ -89,6 +89,18 @@ app.get('/programs', async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to fetch programs' });
   }
 });
+
+app.get('/clients', async (req: Request, res: Response) => {
+  try {
+    const clients = await Program.find().select('clientData');
+    const clientList = clients.map((client: IProgram) => ({ ...client.clientData }));
+    res.json(clientList);
+  } catch (error) {
+    console.error('Error fetching clients:', error);
+    res.status(500).json({ error: 'Failed to fetch clients' });
+  }
+});
+
 
 // Start the server
 app.listen(PORT, () => {

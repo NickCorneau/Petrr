@@ -1,8 +1,19 @@
+/* app.css */
+
+/* Reset styles for consistency */
+* {
+  box-sizing: border-box;
+}
+
+/* Center the app root with a maximum width */
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 2rem; /* Remove padding for the flex container */
+  text-align: left; 
+  height: 100vh; /* Ensure full viewport height */
+  border: 1px solid transparent; /* Remove default border */
+  outline: none;
 }
 
 .logo {

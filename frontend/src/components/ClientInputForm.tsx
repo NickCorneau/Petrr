@@ -13,6 +13,7 @@ interface ClientInputFormProps {
 const ClientInputForm: React.FC<ClientInputFormProps> = ({ clientData, onChange, onSubmit, loading }) => {
   return (
     <form onSubmit={onSubmit} className="form">
+    <h3 className="title">Client Input Form</h3>
       {Object.keys(clientData).map((key) => (
         <div className="form-group" key={key}>
           <input

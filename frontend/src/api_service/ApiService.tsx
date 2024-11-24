@@ -4,6 +4,7 @@ const API_BASE_URL = 'http://localhost:5000';
 
 // Define the type for the client data
 export interface ClientData {
+  name: string;
   age: number;
   gender: string;
   fitnessLevel: string;
@@ -30,5 +31,15 @@ export const generateProgram = async (clientData: ClientData): Promise<string> =
   } catch (error: any) {
     console.error('API call failed:', error.message || error);
     throw new Error('Failed to generate program');
+  }
+};
+
+export const getClients = async (): Promise<ClientData[]> => {
+  try {
+    const response: AxiosResponse<ClientData[]> = await axios.get(`${API_BASE_URL}/clients`);
+    return response.data;
+  } catch (error: any) {
+    console.error('API call failed:', error.message || error);
+    throw new Error('Failed to fetch clients');
   }
 };

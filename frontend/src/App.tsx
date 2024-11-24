@@ -6,9 +6,9 @@ import './App.css';
 const App: React.FC = () => {
   return (
     <div id="root">
-      <header>
-        <ProgramGenerator />
-      </header>
+      <h1 className="title">Hello, I'm Petrr-LLM</h1>
+      <h2 className="subtitle">(Pe)rsonal (Tr)aining (R)esearch Aide</h2>
+      <ProgramGenerator />
     </div>
   );
 };
