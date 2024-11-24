@@ -5,6 +5,9 @@ import { ChatOpenAI } from '@langchain/openai';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { StringOutputParser } from '@langchain/core/output_parsers';
 import { SystemMessage, HumanMessage } from '@langchain/core/messages';
+import mongoose from 'mongoose';
+import Program, { IClientData } from './models/Program';
+
 
 dotenv.config();
 
@@ -15,9 +18,18 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Connect to MongoDB
+mongoose
+  .connect(process.env.MONGODB_URI!, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    } as mongoose.ConnectOptions)
+  .then(() => console.log('MongoDB connected'))
+  .catch((err) => console.error('MongoDB connection error:', err));
+
 // Initialize the OpenAI model
 const model = new ChatOpenAI({
-  openAIApiKey: process.env.OPENAI_API_KEY || '',
+  openAIApiKey: process.env.OPENAI_API_KEY,
   model: 'gpt-4',
   temperature: 0.7,
 });
@@ -53,32 +65,34 @@ const llmChain = promptTemplate.pipe(model).pipe(parser);
 
 // API Endpoint
 app.post('/generate-program', async (req: Request, res: Response) => {
-  const {
-    age,
-    gender,
-    fitnessLevel,
-    goals,
-    preferences,
-    limitations,
-    equipment,
-    availability,
-  } = req.body;
-
+  const clientData: IClientData = req.body;
   try {
-    const response = await llmChain.invoke({
-      age,
-      gender,
-      fitnessLevel,
-      goals,
-      preferences,
-      limitations,
-      equipment,
-      availability,
+    
+    // invoke call to OpenAI
+    const response = await llmChain.invoke(clientData);
+    
+    // save new program and client data to MongoDB
+    const newProgram = new Program({
+      clientData,
+      programText: response,
     });
+    await newProgram.save();
+
+    // return JSON response to the requestee
     res.json({ program: response });
   } catch (error) {
     console.error('Error generating program:', error);
     res.status(500).json({ error: 'Failed to generate program' });
+  }
+});
+
+app.get('/programs', async (req: Request, res: Response) => {
+  try {
+    const programs = await Program.find();
+    res.json(programs);
+  } catch (error) {
+    console.error('Error fetching programs:', error);
+    res.status(500).json({ error: 'Failed to fetch programs' });
   }
 });
 

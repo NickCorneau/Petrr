@@ -1,5 +1,5 @@
 # Secrets file
-backend/.env
+.env
 
 # Logs
 logs

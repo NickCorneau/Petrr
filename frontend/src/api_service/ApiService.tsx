@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-const API_URL = 'http://localhost:5000';
+const API_BASE_URL = 'http://localhost:5000';
 
 // Define the type for the client data
 export interface ClientData {
@@ -20,12 +20,10 @@ export interface GenerateProgramResponse {
 }
 
 // Function to generate the workout program
-export const generateProgram = async (
-  clientData: ClientData
-): Promise<string> => {
+export const generateProgram = async (clientData: ClientData): Promise<string> => {
   try {
     const response: AxiosResponse<GenerateProgramResponse> = await axios.post(
-      `${API_URL}/generate-program`,
+      `${API_BASE_URL}/generate-program`,
       clientData
     );
     return response.data.program;
