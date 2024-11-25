@@ -1,62 +1,80 @@
 // frontend/src/containers/ProgramGenerator.tsx
+
 import React, { useState } from 'react';
-import { generateProgram, ClientData } from '../api_service/ApiService';
+import { generateProgramForClient, ClientData } from '../api_service/ApiService';
 import ClientInputForm from '../components/ClientInputForm';
 import ProgramOutput from '../components/ProgramOutput';
 import ClientSidebar from '../components/ClientSidebar';
+import './ProgramGenerator.css';
 
 const ProgramGenerator: React.FC = () => {
-  const [clientData, setClientData] = useState<ClientData>({
-    name: '',
-    age: '',
-    gender: '',
-    fitnessLevel: '',
-    goals: '',
-    preferences: '',
-    limitations: '',
-    equipment: '',
-    availability: '',
-  });
+  const [selectedClient, setSelectedClient] = useState<ClientData | null>(null);
   const [program, setProgram] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setClientData({ ...clientData, [e.target.name]: e.target.value });
+  // Handle client creation
+  const handleCreateClient = (newClient: ClientData) => {
+    setSelectedClient(newClient);
+    setProgram(''); // Clear the program output
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // Handle program generation for the selected client
+  const handleGenerateProgram = async () => {
+    if (!selectedClient || !selectedClient.id) {
+      setError('Please create or select a client before generating a program.');
+      return;
+    }
+
     setLoading(true);
     setError(null);
     try {
-      const generatedProgram = await generateProgram(clientData);
+      const generatedProgram = await generateProgramForClient(selectedClient.id);
       setProgram(generatedProgram);
-    } catch (err) {
+    } catch (err: any) {
       setError('Failed to generate program. Please try again later.');
     } finally {
       setLoading(false);
     }
   };
 
+  // Handle client selection from the sidebar
   const handleSelectClient = (client: ClientData) => {
-    setClientData(client);
+    setSelectedClient(client);
+    setProgram(''); // Clear the program when switching clients
   };
 
   return (
     <div className="program-generator-container">
-      <ClientSidebar onSelectClient={handleSelectClient} />
+      <div className="client-sidebar">
+        <ClientSidebar onSelectClient={handleSelectClient} />
+      </div>
 
       <div className="program-generator-content">
-        <ClientInputForm
-          clientData={clientData}
-          onChange={handleChange}
-          onSubmit={handleSubmit}
-          loading={loading}
-        />
+        {/* Client Input Form */}
+        <ClientInputForm onClientCreated={handleCreateClient} />
+
+        {/* Error Message */}
         {error && <p className="error-message">{error}</p>}
-        {program && <ProgramOutput program={program} />}
+
+        {/* Generate Program Button */}
+        {selectedClient && selectedClient.id && (
+          <button
+            className="generate-program-button"
+            onClick={handleGenerateProgram}
+            disabled={loading}
+          >
+            {loading ? 'Generating Program...' : 'Generate Program'}
+          </button>
+        )}
       </div>
+
+      {/* Program Output */}
+      {program && (
+        <div className="program-output">
+          <ProgramOutput program={program} />
+        </div>
+      )}
     </div>
   );
 };

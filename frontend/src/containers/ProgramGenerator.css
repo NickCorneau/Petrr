@@ -1,32 +1,50 @@
 /* ProgramGenerator.css */
 
-/* Parent container */
-.program-generator-container {
-  /* all: unset; Resets all inherited and default properties */
-  /* display: flex !important; Enforce flex display */
-  /* flex-direction: row; Arrange children horizontally */
-  height: 100vh; /* Full height of the viewport */
-  max-width: 100%; /* Allow the container to use full width */
-  /* margin: 0;
-  padding: 0; */
-  padding: 0 20px;
-  column-gap: 20px;
-  grid-template-columns: 250px 1fr;
-  display: grid
-;
+/* Wrapper that stacks grid and output vertically */
+.program-generator-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
-/* Main content area */
-.program-generator-content {
-  flex: 1; /* Take up remaining horizontal space */
-  padding: 30px;
+/* Grid container for the first row */
+.program-generator-container {
+  flex: 1; /* Allows it to expand and fill available space */
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-areas: "sidebar input";
+  gap: 20px;
+  padding: 20px;
+  max-width: 100%;
+}
+
+/* Client Sidebar */
+.client-sidebar {
+  grid-area: sidebar;
+  overflow-y: auto;
+  /* background-color: #fff; */
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  font-family: 'Inter', sans-serif;
-  overflow-y: auto; /* Allow scrolling if content overflows */
-  display: flex; /* Vertical stacking of content inside this area */
-  flex-direction: column;
-  justify-content: flex-start; /* Align content to the top */
+  box-sizing: border-box;
+  /* Additional styles */
+}
+
+/* Program Generator Content (Input Form) */
+.program-generator-content {
+  grid-area: input;
+  overflow-y: auto;
+  /* background-color: #fff; */
+  border-radius: 12px;
+  box-sizing: border-box;
+  /* Additional styles */
+}
+
+/* Program Output */
+.program-output {
+  padding: 20px;
+  /* background-color: #fff; */
+  overflow-y: auto;
+  box-sizing: border-box;
+  /* Optional: Set max-height or flex-grow if needed */
 }
 
 /* Error message */
@@ -35,3 +53,19 @@
   text-align: center;
   margin-top: 10px;
 }
+
+/* Generate button */
+.generate-program-button {
+  margin-top: 15px;
+  background-color: rgb(84, 29, 136);
+}
+
+/* Additional styles for consistency */
+.client-sidebar,
+.program-generator-content,
+.program-output {
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Adjust margins and paddings as needed */

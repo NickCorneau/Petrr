@@ -1,3 +1,5 @@
+// frontend/src/components/ClientSidebar.tsx
+
 import React, { useEffect, useState } from 'react';
 import { ClientData, getClients } from '../api_service/ApiService';
 import './ClientSidebar.css';
@@ -8,34 +10,29 @@ interface ClientSidebarProps {
 
 const ClientSidebar: React.FC<ClientSidebarProps> = ({ onSelectClient }) => {
   const [clients, setClients] = useState<ClientData[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchClients = async () => {
-      setLoading(true);
-      setError(null);
       try {
-        const clientsData = await getClients();
-        setClients(clientsData);
-      } catch (err) {
-        setError('Failed to fetch clients. Please try again later.');
-      } finally {
-        setLoading(false);
+        const clientList = await getClients();
+        setClients(clientList);
+      } catch (err: any) {
+        setError(err.message || 'Failed to fetch clients');
       }
     };
+
     fetchClients();
   }, []);
 
   return (
     <div className="client-sidebar">
-      <h3 className="title">Clients</h3>
-      {loading && <p>Loading clients...</p>}
-      {error && <p>{error}</p>}
+      <h3>Clients</h3>
+      {error && <div className="error-message">{error}</div>}
       <ul>
         {clients.map((client) => (
-          <li key={client._doc._id} onClick={() => onSelectClient(client)}>
-            {client._doc.age} ({client._doc.gender}) - {client._doc.fitnessLevel}
+          <li key={client.id} onClick={() => onSelectClient(client)}>
+            {client.name} ({client.age} {client.gender}) - {client.fitnessLevel}
           </li>
         ))}
       </ul>

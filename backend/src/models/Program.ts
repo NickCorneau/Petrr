@@ -1,16 +1,21 @@
-import mongoose, { Document, Schema } from 'mongoose';
-import { ClientDataSchema, IClientData } from './ClientData';
+// backend/src/models/Program.ts
+
+import mongoose, { Schema, Document } from 'mongoose';
+import { IClientData } from './ClientData';
 
 export interface IProgram extends Document {
   clientData: IClientData;
   programText: string;
-  createdAt: Date;
 }
 
 const ProgramSchema: Schema = new Schema({
-  clientData: { type: ClientDataSchema, required: true, _id: false },
+  clientData: { type: Object, required: true },
   programText: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now },
+});
+
+// Include virtuals to have `id` instead of `_id`
+ProgramSchema.set('toJSON', {
+  virtuals: true,
 });
 
 export default mongoose.model<IProgram>('Program', ProgramSchema);
