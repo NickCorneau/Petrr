@@ -25,7 +25,7 @@ const ClientInputForm: React.FC<ClientInputFormProps> = ({ onClientCreated }) =>
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setClientData((prevData) => ({
+    setClientData((prevData: ClientData) => ({
       ...prevData,
       [name]:
         name === 'age'

@@ -1,0 +1,33 @@
+/* src/programs/ProgramContainer.css */
+.program-container {
+    padding: 20px;
+    /* background-color: #ffffff; */
+    border-radius: 8px;
+  }
+  
+  .generate-program-button {
+    padding: 10px 20px;
+    background-color: #8317a3;
+    /* color: white; */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 20px 0;
+  }
+  
+  .generate-program-button:disabled {
+    background-color: #cccccca8;
+    cursor: not-allowed;
+  }
+  
+  .program-output {
+    margin-top: 20px;
+    padding: 20px;
+    /* background-color: #f8f9fa; */
+    border-radius: 4px;
+  }
+  
+  .error-message {
+    color: #dc3545;
+    margin: 10px 0;
+  }

@@ -49,3 +49,14 @@
 .read-the-docs {
   color: #888;
 }
+
+/* src/App.css */
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.error-message {
+  color: red;
+}

@@ -1,0 +1,20 @@
+/* src/clients/ClientContainer.css */
+.client-container {
+    display: flex;
+    max-width: 800px;
+  }
+
+  .client-content {
+    flex-grow: 1;
+    padding: 0px 20px 20px 20px;
+    overflow-y: auto;
+    min-width: 400px;
+  }
+  
+  .no-selection-message {
+    padding: 20px;
+    color: #849aaf;
+    text-align: center;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+  }

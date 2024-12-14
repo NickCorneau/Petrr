@@ -1,0 +1,97 @@
+/* ClientSidebar.css */
+
+.client-header {
+  font-size: 1.5em;
+  display: flex;
+  align-items: center; /* Aligns items vertically in the center */
+  justify-content: space-between; /* Optional: Space them apart evenly */
+}
+
+.client-sidebar {
+    padding: 0px 20px 20px 20px;
+    color: white;
+    min-width: 300px;
+    position: sticky;
+}
+
+.client-sidebar h3 {
+    margin-bottom: 20px;
+    color: white;
+}
+
+.client-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.client-sidebar li {
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background-color: #2a2a2a;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.client-sidebar li:hover {
+    background-color: #3a3a3a;
+}
+
+.client-sidebar li.selected {
+    background-color: #4a4a4a;
+}
+
+.client-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.error-message {
+    color: #ff6b6b;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #2a2a2a;
+    border-radius: 4px;
+}
+  
+.search-container {
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  background-color: #2a2a2a;
+  color: white;
+  font-size: 14px;
+}
+
+.search-input::placeholder {
+  color: #888;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #4a4a4a;
+}
+
+.create-client-button {
+  padding: 0;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-client-button:hover {
+  background-color: #3a3a3a;
+}
